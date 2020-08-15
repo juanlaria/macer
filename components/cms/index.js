@@ -3,7 +3,7 @@ import { default as hero } from './hero';
 import { default as banner_with_caption } from './banner';
 import { default as columnas_de_texto } from './textColumns';
 import { default as cards1 } from './cards';
-import { default as banner_card } from './BannerCard';
+import { default as banner_card } from './bannerCard';
 import { default as cards } from './linkCards';
 import { default as logos } from './logos';
 import { default as carrusel } from './carousel';
