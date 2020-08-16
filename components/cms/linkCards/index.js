@@ -1,40 +1,63 @@
+import { useEffect } from 'react';
 import { RichText } from 'prismic-reactjs';
 import PropTypes from 'prop-types';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import { Container } from '../../../shared/styles';
-import { objectNotEmpty } from '../../../utils/helpers';
-import Image from '../../image';
-import Link from '../../link';
-import { LinkCardsSection, Columns, Card, CardImage, CardBox } from './styles';
+import Card from './Card';
+import { LinkCardsSection, Columns } from './styles';
 
 const LinkCards = ({
   primary: { link_cards_title, grey, related },
   items,
   className,
 }) => {
+  const controls = useAnimation();
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    rootMargin: '-50px 0px',
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [controls, inView]);
+
   return (
-    <LinkCardsSection className={`${className} ${grey && '-grey'}`} related={related}>
+    <LinkCardsSection
+      className={`${className} ${grey && '-grey'}`}
+      related={related}
+    >
       <Container>
         {link_cards_title && (
-          <h2 className="title">{RichText.asText(link_cards_title)}</h2>
+          <motion.h2
+            ref={ref}
+            animate={controls}
+            initial="hidden"
+            variants={{
+              visible: { letterSpacing: '0px', opacity: 1 },
+              hidden: { letterSpacing: '2px', opacity: 0 },
+            }}
+            transition={{
+              damping: 20,
+              stiffness: 25,
+              duration: 0.5,
+            }}
+            className="title"
+          >
+            {RichText.asText(link_cards_title)}
+          </motion.h2>
         )}
         {!!items?.length && (
           <Columns>
             {items.map(card => (
-              <Card>
-                <Link link={card.card_link}>
-                  <CardImage>
-                    {objectNotEmpty(card.card_image) && (
-                      <Image data={card.card_image} loading="lazy" />
-                    )}
-                  </CardImage>
-                  <CardBox>
-                    {card.card_title && <RichText render={card.card_title} />}
-                    {card.card_description && (
-                      <RichText render={card.card_description} />
-                    )}
-                  </CardBox>
-                </Link>
-              </Card>
+              <Card
+                link={card.card_link}
+                image={card.card_image}
+                title={card.card_title}
+                description={card.card_description}
+              />
             ))}
           </Columns>
         )}

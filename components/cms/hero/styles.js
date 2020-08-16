@@ -6,17 +6,24 @@ export const HeroSection = styled('section')`
     height: 100vh;
   }
 
-  .bg {
+  .bg-wrapper {
     display: block;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
+    z-index: 0;
+    overflow: hidden;
 
     height: 100%;
     max-height: 80vh;
+  }
 
-    z-index: 0;
+  .bg-inner-wrapper {
+    height: 100%;
+  }
+
+  .bg {
     background-color: var(--color-grey);
 
     img {

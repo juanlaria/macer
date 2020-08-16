@@ -1,28 +1,55 @@
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import useNativeLazyLoading from '@charlietango/use-native-lazy-loading';
+import { useInView } from 'react-intersection-observer';
 
 // DOCS: https://docs.imgix.com/apis/url/size
 
 const Image = ({ data, fit, width, height, loading, className }) => {
   const { dimensions, url, alt, bigger } = data;
 
+  const [loaded, setLoaded] = useState(true);
+  const supportsLazyLoading = useNativeLazyLoading();
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    rootMargin: '220px 0px',
+  });
+  const ready = inView || supportsLazyLoading;
+
+  useEffect(() => {
+    // Setting loaded to true once, when it's appears in the viewport.
+    if (ready) {
+      setLoaded(false);
+    }
+  }, [ready]);
+
   const img = {
     width: width || dimensions.width || false,
-    height: height || dimensions.height || false
+    height: height || dimensions.height || false,
   };
 
+  // The first render will try to load a bad quality image blurred. Then, when in view, it will load the best
+  // quality and display it as soon is ready.
   let resizedUrl = url;
-  if (fit) {
-    resizedUrl += `&fit=${fit}`
-  }
   if (width) {
-    resizedUrl += `&w=${width}`
+    resizedUrl += `&w=${ready ? width : (width / 10).toFixed(0)}`;
   }
   if (height) {
-    resizedUrl += `&h=${height}`
+    resizedUrl += `&h=${ready ? height : (height / 10).toFixed(0)}`;
+  }
+  if (ready) {
+    if (fit) {
+      resizedUrl += `&fit=${fit}`;
+    }
+    resizedUrl += '&q=100';
+    resizedUrl += '&blur=0';
+  } else {
+    resizedUrl += '&q=10';
+    resizedUrl += '&blur=200';
   }
 
   return (
-    <picture className={className}>
+    <picture ref={!supportsLazyLoading ? ref : undefined} className={className}>
       {bigger && <source srcSet={bigger.url} media="(min-width: 600px)" />}
       <img
         src={resizedUrl}

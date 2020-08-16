@@ -43,7 +43,6 @@ const Header = ({
 
   return (
     <HeaderSection className={className} scrolled={isScrolled}>
-      {console.log('IS SCROLLED', isScrolled)}
       <SkipToContent>
         <a href="#main">Ir al contenido</a>
       </SkipToContent>

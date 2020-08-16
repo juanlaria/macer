@@ -22,7 +22,8 @@ export const Columns = styled('ul')`
   margin: 0;
 `;
 
-export const Card = styled('li')`
+export const CardWrapper = styled('div')`
+  height: 100%;
   background-color: var(--color-white);
   box-shadow: var(--elevation-z4);
   border-radius: var(--border-radius);
