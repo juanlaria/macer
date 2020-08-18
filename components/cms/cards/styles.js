@@ -21,7 +21,7 @@ export const Columns = styled('ul')`
   margin: 0;
 `;
 
-export const Card = styled('li')`
+export const CardWrapper = styled('div')`
   h3 {
     font-size: 1.2rem;
     line-height: 1.33;

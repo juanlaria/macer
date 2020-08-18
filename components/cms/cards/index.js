@@ -6,7 +6,8 @@ import { useInView } from 'react-intersection-observer';
 import { Container } from '../../../shared/styles';
 import { objectNotEmpty } from '../../../utils/helpers';
 import Image from '../../image';
-import { CardsSection, Columns, Card, ImageWrapper, CardBox } from './styles';
+import Card from './Card';
+import { CardsSection, Columns } from './styles';
 
 const Cards = ({ primary: { cards_title, grey }, items, className }) => {
   const controls = useAnimation();
@@ -45,19 +46,7 @@ const Cards = ({ primary: { cards_title, grey }, items, className }) => {
         {!!items?.length && (
           <Columns>
             {items.map(card => (
-              <Card>
-                <ImageWrapper>
-                  {objectNotEmpty(card.card_image) && (
-                    <Image data={card.card_image} loading="lazy" />
-                  )}
-                </ImageWrapper>
-                <CardBox>
-                  {card.card_title && <RichText render={card.card_title} />}
-                  {card.card_description && (
-                    <RichText render={card.card_description} />
-                  )}
-                </CardBox>
-              </Card>
+              <Card image={card.card_image} title={card.card_title} description={card.card_description} />
             ))}
           </Columns>
         )}
