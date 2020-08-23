@@ -11,10 +11,17 @@ import Item from './Item';
 import { LogosSection, Columns } from './styles';
 
 const Logos = ({
-  primary: { logos_title, logos_button_label, logos_button_link, grey },
+  primary: {
+    component_id,
+    logos_title,
+    logos_button_label,
+    logos_button_link,
+    grey,
+  },
   items,
   className,
 }) => {
+  const id = component_id && (RichText.asText(component_id) || null);
   const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -29,6 +36,7 @@ const Logos = ({
 
   return (
     <LogosSection className={`${className} ${grey ? '-grey' : ''}`}>
+      <div id={id} className="anchor" />
       <Container>
         {logos_title && (
           <motion.h2
@@ -53,9 +61,7 @@ const Logos = ({
           <Columns>
             {items.map(item => {
               if (objectNotEmpty(item.logo_image)) {
-                return (
-                  <Item image={item.logo_image} />
-                );
+                return <Item image={item.logo_image} />;
               }
             })}
           </Columns>

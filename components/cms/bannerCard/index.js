@@ -9,6 +9,7 @@ import { BannerCardSection, Box } from './styles';
 
 const BannerCard = ({
   primary: {
+    component_id,
     banner_card_title,
     banner_card_description,
     banner_card_button_label,
@@ -18,6 +19,7 @@ const BannerCard = ({
   },
   className,
 }) => {
+  const id = component_id && (RichText.asText(component_id) || null);
   const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -37,6 +39,7 @@ const BannerCard = ({
       bgBottom={bg_bottom}
       ref={ref}
     >
+      <div id={id} className="anchor" />
       <Container>
         <motion.div
           animate={controls}

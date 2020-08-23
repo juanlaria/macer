@@ -6,15 +6,17 @@ import { HeroSection, Box } from './styles';
 
 const Hero = ({ primary, className }) => {
   const {
+    component_id,
     hero_background_image,
     hero_logo,
     hero_title,
     hero_description,
     grey,
   } = primary;
+  const id = component_id && (RichText.asText(component_id) || null);
   if (primary) {
     return (
-      <HeroSection className={`${className} ${grey ? '-grey' : ''}`}>
+      <HeroSection id={id} className={`${className} ${grey ? '-grey' : ''}`}>
         {hero_background_image && (
           <div className="bg-wrapper">
             <motion.div

@@ -10,6 +10,7 @@ import { BannerSection, Wrapper, TextSection } from './styles';
 
 const Banner = ({
   primary: {
+    component_id,
     banner_title,
     banner_description,
     banner_image,
@@ -20,6 +21,7 @@ const Banner = ({
   },
   className,
 }) => {
+  const id = component_id && (RichText.asText(component_id) || null);
   const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -39,6 +41,7 @@ const Banner = ({
       }`}
       ref={ref}
     >
+      <div id={id} className="anchor" />
       <Container>
         <Wrapper>
           {banner_image && (

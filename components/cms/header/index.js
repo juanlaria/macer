@@ -62,7 +62,7 @@ const Header = ({
               <ul>
                 {header_links.map((el, index) => (
                   <li key={`${el.link.id}-${index}`}>
-                    <Link link={el.link}>{RichText.asText(el.link_label)}</Link>
+                    <Link link={el.link} hash={el.link_hash}>{RichText.asText(el.link_label)}</Link>
                   </li>
                 ))}
                 {header_cta_label && header_cta_link && (

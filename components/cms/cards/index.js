@@ -9,7 +9,8 @@ import Image from '../../image';
 import Card from './Card';
 import { CardsSection, Columns } from './styles';
 
-const Cards = ({ primary: { cards_title, grey }, items, className }) => {
+const Cards = ({ primary: { component_id, cards_title, grey }, items, className }) => {
+  const id = component_id && (RichText.asText(component_id) || null);
   const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -24,6 +25,7 @@ const Cards = ({ primary: { cards_title, grey }, items, className }) => {
 
   return (
     <CardsSection className={`${className} ${grey && '-grey'}`}>
+    <div id={id} className="anchor" />
       <Container>
         {cards_title && (
           <motion.div

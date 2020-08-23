@@ -8,10 +8,11 @@ import Column from './Column';
 import { TextColumnsSection, Columns } from './styles';
 
 const TextColumns = ({
-  primary: { text_columns_title, text_columns_quantity },
+  primary: { component_id, text_columns_title, text_columns_quantity },
   items,
   className,
 }) => {
+  const id = component_id && (RichText.asText(component_id) || null);
   const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -26,6 +27,7 @@ const TextColumns = ({
 
   return (
     <TextColumnsSection className={className}>
+      <div id={id} className="anchor" />
       <Container>
         {text_columns_title && (
           <motion.div

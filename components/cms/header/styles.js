@@ -8,7 +8,7 @@ export const HeaderSection = styled('header')`
   align-items: center;
   width: 100%;
   height: ${props =>
-    props.scrolled ? 'calc(var(--header-size) / 1.25)' : 'var(--header-size)'};
+    props.scrolled ? 'var(--header-size)' : 'calc(var(--header-size) * 1.25)'};
   z-index: 2;
   background-color: white;
   box-shadow: ${props =>

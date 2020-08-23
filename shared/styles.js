@@ -20,18 +20,21 @@ export const globalStyles = (
         --color-darkYellow: #edbb0c;
 
         --border-radius: 8px;
-        --header-size: 6rem;
+        --header-size: 5rem;
 
         --elevation-z1: 0 2px 1px -1px rgba(33, 33, 33, 0.1),
           0 1px 1px 0 rgba(33, 33, 33, 0.07), 0 1px 3px 0 rgba(33, 33, 33, 0.05);
         --elevation-z2: 0 3px 1px -2px rgba(33, 33, 33, 0.1),
           0 2px 2px 0 rgba(33, 33, 33, 0.07), 0 1px 5px 0 rgba(33, 33, 33, 0.05);
         --elevation-z4: 0 2px 4px -1px rgba(33, 33, 33, 0.1),
-          0 4px 5px 0 rgba(33, 33, 33, 0.07), 0 1px 10px 0 rgba(33, 33, 33, 0.05);
+          0 4px 5px 0 rgba(33, 33, 33, 0.07),
+          0 1px 10px 0 rgba(33, 33, 33, 0.05);
         --elevation-z6: 0 3px 5px -1px rgba(33, 33, 33, 0.1),
-          0 6px 10px 0 rgba(33, 33, 33, 0.07), 0 1px 18px 0 rgba(33, 33, 33, 0.05);
+          0 6px 10px 0 rgba(33, 33, 33, 0.07),
+          0 1px 18px 0 rgba(33, 33, 33, 0.05);
         --elevation-z8: 0 5px 5px -3px rgba(33, 33, 33, 0.1),
-          0 8px 10px 1px rgba(33, 33, 33, 0.07), 0 3px 14px 2px rgba(33, 33, 33, 0.05);
+          0 8px 10px 1px rgba(33, 33, 33, 0.07),
+          0 3px 14px 2px rgba(33, 33, 33, 0.05);
         --elevation-z12: 0 7px 8px -4px rgba(33, 33, 33, 0.1),
           0 12px 17px 2px rgba(33, 33, 33, 0.07),
           0 5px 22px 4px rgba(33, 33, 33, 0.05);
@@ -44,6 +47,10 @@ export const globalStyles = (
 
       * {
         box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
       }
 
       html,
@@ -104,7 +111,7 @@ export const globalStyles = (
           flex: 1;
         }
 
-        .component{
+        .component {
           padding: 2.2rem 0;
 
           &:first-of-type {
@@ -158,6 +165,11 @@ export const globalStyles = (
 
         &.-grey {
           background-color: var(--color-lightGrey);
+        }
+
+        .anchor {
+          position: absolute;
+          top: calc(var(--header-size) * -1);
         }
       }
 
@@ -251,7 +263,6 @@ export const globalStyles = (
   />
 );
 
-/* Visually hidden class */
 export const containerStyles = css`
   width: 100%;
   margin-left: auto;

@@ -8,10 +8,11 @@ import Card from './Card';
 import { LinkCardsSection, Columns } from './styles';
 
 const LinkCards = ({
-  primary: { link_cards_title, grey, related },
+  primary: { component_id, link_cards_title, grey, related },
   items,
   className,
 }) => {
+  const id = component_id && (RichText.asText(component_id) || null);
   const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -29,6 +30,7 @@ const LinkCards = ({
       className={`${className} ${grey && '-grey'}`}
       related={related}
     >
+      <div id={id} className="anchor" />
       <Container>
         {link_cards_title && (
           <motion.h2
