@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { RichText } from 'prismic-reactjs';
 import PropTypes from 'prop-types';
+import NextLink from 'next/link';
 import { Container } from '../../../shared/styles';
 import Link from '../../link';
 import Image from '../../image';
@@ -23,7 +24,7 @@ const Header = ({
     const { scrollY } = window;
 
     return scrollY;
-  }
+  };
 
   const handleScroll = useCallback(() => {
     setIsScrolled(getScrollY());
@@ -49,20 +50,26 @@ const Header = ({
       <Container>
         <Wrapper>
           {site_logo && (
-            <Image
-              data={site_logo}
-              fit="clip"
-              width="264"
-              height="72"
-              loading="eager"
-            />
+            <NextLink as="/" href="/">
+              <a>
+                <Image
+                  data={site_logo}
+                  fit="clip"
+                  width="264"
+                  height="72"
+                  loading="eager"
+                />
+              </a>
+            </NextLink>
           )}
           {!!header_links?.length && (
             <Nav>
               <ul>
                 {header_links.map((el, index) => (
                   <li key={`${el.link.id}-${index}`}>
-                    <Link link={el.link} hash={el.link_hash}>{RichText.asText(el.link_label)}</Link>
+                    <Link link={el.link} hash={el.link_hash}>
+                      {RichText.asText(el.link_label)}
+                    </Link>
                   </li>
                 ))}
                 {header_cta_label && header_cta_link && (

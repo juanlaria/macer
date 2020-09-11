@@ -18,11 +18,15 @@ export const HeaderSection = styled('header')`
 
   picture {
     img {
-      max-height: ${props =>
-        props.scrolled ? '50px' : '58px'};
+      max-height: 32px;
       object-fit: contain;
       object-position: left;
       transition: max-height 400ms ease-in-out;
+
+      @media (min-width: ${screenMDmin}) {
+        max-height: ${props =>
+          props.scrolled ? '50px' : '58px'};
+      }
     }
   }
 `;
