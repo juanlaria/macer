@@ -1,5 +1,3 @@
-import { RichText } from 'prismic-reactjs';
-import { useForm } from 'react-hook-form';
 import { FieldWrapper } from './styles';
 
 const Field = ({
@@ -7,7 +5,7 @@ const Field = ({
   type,
   required,
   placeholder,
-  index,
+  name,
   register,
   errors,
 }) => {
@@ -16,7 +14,7 @@ const Field = ({
     case 'Teléfono':
     case 'phone':
       data = {
-        name: `phone-${index + 1 || 'noindex'}`,
+        name,
         type: 'tel',
         required,
         label,
@@ -26,7 +24,7 @@ const Field = ({
     case 'Email':
     case 'email':
       data = {
-        name: `email-${index + 1 || 'noindex'}`,
+        name,
         type: 'email',
         pattern: {
           value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -40,7 +38,7 @@ const Field = ({
     case 'Archivo':
     case 'file':
       data = {
-        name: `file-${index + 1 || 'noindex'}`,
+        name,
         type: 'file',
         required,
         label,
@@ -50,7 +48,7 @@ const Field = ({
     case 'Texto largo':
     case 'textarea':
       data = {
-        name: `textarea-${index + 1 || 'noindex'}`,
+        name,
         type: 'textarea',
         required,
         label,
@@ -61,7 +59,7 @@ const Field = ({
     case 'text':
     default:
       data = {
-        name: `text-${index + 1 || 'noindex'}`,
+        name,
         type: 'text',
         required,
         label,
@@ -71,11 +69,11 @@ const Field = ({
   }
   if (data.type === 'textarea') {
     return (
-      <FieldWrapper for={data.name} type={data.type}>
+      <FieldWrapper htmlFor={data.name} type={data.type}>
         <textarea
           name={data.name}
           id={data.name}
-          placeholder={RichText.asText(data.placeholder)}
+          placeholder={data.placeholder}
           type={data.type}
           required={!!data.required}
           ref={register({
@@ -84,7 +82,7 @@ const Field = ({
           })}
         />
         {data.label && (
-          <span className="label">{`${RichText.asText(data.label)}${
+          <span className="label">{`${data.label}${
             data.required ? ' (obligatorio)' : ''
           }`}</span>
         )}
@@ -95,11 +93,11 @@ const Field = ({
     );
   } else {
     return (
-      <FieldWrapper for={data.name} type={data.type}>
+      <FieldWrapper htmlFor={data.name} type={data.type}>
         <input
           name={data.name}
           id={data.name}
-          placeholder={RichText.asText(data.placeholder)}
+          placeholder={data.placeholder}
           type={data.type}
           required={!!data.required}
           ref={register({
@@ -108,7 +106,7 @@ const Field = ({
           })}
         />
         {data.label && (
-          <span className="label">{`${RichText.asText(data.label)}${
+          <span className="label">{`${data.label}${
             data.required ? ' (obligatorio)' : ''
           }`}</span>
         )}
