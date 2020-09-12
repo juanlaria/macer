@@ -20,6 +20,7 @@ export const globalStyles = (
         --color-white: #ffffff;
         --color-yellow: #ffcb08;
         --color-darkYellow: #edbb0c;
+        --color-red: #ff0808;
 
         --border-radius: 8px;
 
@@ -256,8 +257,10 @@ export const globalStyles = (
         text-align: center;
         padding: 0.8rem 1.6rem;
         background: var(--color-yellow);
+        border: 2px solid transparent;
         border-radius: var(--border-radius);
         box-shadow: var(--elevation-z2);
+        outline: none;
         transition: var(--transition-elevation);
 
         @media (max-width: ${screenSMmax}) {
@@ -269,6 +272,10 @@ export const globalStyles = (
         &:hover,
         &:focus {
           box-shadow: var(--elevation-z4);
+        }
+
+        &:focus {
+          border-color: var(--color-black);
         }
       }
 

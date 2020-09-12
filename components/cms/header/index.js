@@ -19,6 +19,7 @@ const Header = ({
   }
 
   const [isScrolled, setIsScrolled] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const getScrollY = () => {
     const { scrollY } = window;
@@ -26,8 +27,11 @@ const Header = ({
     return scrollY;
   };
 
+  const handleMenuToggle = () => setIsOpen(!isOpen);
+
   const handleScroll = useCallback(() => {
     setIsScrolled(getScrollY());
+    setIsOpen(false);
   }, []);
 
   useEffect(() => {
@@ -43,7 +47,7 @@ const Header = ({
   }, [handleScroll]);
 
   return (
-    <HeaderSection className={className} scrolled={isScrolled}>
+    <HeaderSection className={className} scrolled={isScrolled} isOpen={isOpen}>
       <SkipToContent>
         <a href="#main">Ir al contenido</a>
       </SkipToContent>
@@ -63,8 +67,19 @@ const Header = ({
             </NextLink>
           )}
           {!!header_links?.length && (
-            <Nav>
-              <ul>
+            <Nav isOpen={isOpen}>
+              <button
+                aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+                aria-hidden
+                onClick={handleMenuToggle}
+                className="nav-button"
+              >
+                <img src={isOpen ? '/images/close.svg' : '/images/menu.svg'} />
+              </button>
+              <ul
+                onFocus={() => setIsOpen(true)}
+                onBlur={() => setIsOpen(false)}
+              >
                 {header_links.map((el, index) => (
                   <li key={`${el.link.id}-${index}`}>
                     <Link link={el.link} hash={el.link_hash}>

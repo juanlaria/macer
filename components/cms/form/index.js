@@ -5,7 +5,7 @@ import { Container } from '../../../shared/styles';
 import { FormSection, FormWrapper, CtaWrapper, Submit } from './styles';
 import Field from './Field';
 
-const Form = ({ primary: { component_id }, items, className }) => {
+const Form = ({ primary: { component_id, file_input, file_input_label }, items, className }) => {
   const id = component_id && (RichText.asText(component_id) || null);
   const { handleSubmit, register, errors } = useForm();
   const onSubmit = values => console.log('SUBMITED!', values);
@@ -21,6 +21,7 @@ const Form = ({ primary: { component_id }, items, className }) => {
                 <Field
                   label={field.label}
                   required={field.required}
+                  placeholder={field.placeholder}
                   type={field.type}
                   index={index}
                   register={register}
@@ -30,6 +31,13 @@ const Form = ({ primary: { component_id }, items, className }) => {
             })}
           <CtaWrapper>
             <Submit type="submit" className="button">Submit</Submit>
+
+            <Field
+              label={file_input_label || 'Adjuntar archivo'}
+              type="file"
+              register={register}
+              errors={errors}
+            />
           </CtaWrapper>
         </FormWrapper>
       </Container>
