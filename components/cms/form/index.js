@@ -8,7 +8,14 @@ import { FormSection, FormWrapper, CtaWrapper, Submit } from './styles';
 import Field from './Field';
 
 const Form = ({
-  primary: { component_id, file_input, file_input_label },
+  primary: {
+    component_id,
+    emails_list,
+    email_subject,
+    accept_extensions,
+    file_input,
+    file_input_label,
+  },
   items,
   className,
 }) => {
@@ -39,8 +46,8 @@ const Form = ({
       let currentField = formField;
       if (currentField.type === 'file') {
         currentField.value = {
-          filename: submittedForm[currentField.id][0].name,
-          path: submittedForm[currentField.id][0].name,
+          filename: submittedForm[currentField.id][0]?.name,
+          path: submittedForm[currentField.id][0]?.name,
         };
       } else {
         currentField.value = submittedForm[currentField.id];
@@ -48,6 +55,8 @@ const Form = ({
 
       return currentField;
     });
+    formValues.push({ type: 'emailsList', value: RichText.asText(emails_list) });
+    formValues.push({ type: 'emailSubject', value: RichText.asText(email_subject) });
     fetch('/api/contact', {
       method: 'post',
       headers: {
@@ -78,6 +87,7 @@ const Form = ({
                     placeholder={field.placeholder}
                     type={field.type}
                     name={field.id}
+                    value={field.value}
                     register={register}
                     errors={errors}
                   />
@@ -97,6 +107,7 @@ const Form = ({
                       RichText.asText(file_input_label) || 'Adjuntar archivo'
                     }
                     type="file"
+                    accept={RichText.asText(accept_extensions)}
                     name={field.id}
                     register={register}
                     errors={errors}

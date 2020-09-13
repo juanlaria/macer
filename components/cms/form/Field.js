@@ -3,6 +3,7 @@ import { FieldWrapper } from './styles';
 const Field = ({
   label,
   type,
+  accept,
   required,
   placeholder,
   name,
@@ -43,6 +44,7 @@ const Field = ({
         required,
         label,
         placeholder,
+        accept,
       };
       break;
     case 'Texto largo':
@@ -100,6 +102,7 @@ const Field = ({
           placeholder={data.placeholder}
           type={data.type}
           required={!!data.required}
+          accept={data.accept}
           ref={register({
             required: data.required && 'Obligatorio',
             pattern: data.pattern,

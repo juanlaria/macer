@@ -12,17 +12,30 @@ let transporter = nodemailer.createTransport({
 });
 
 const send = form => {
+  let emailsList = form.find(field => field.type === 'emailsList');
+  emailsList = emailsList && emailsList.value;
+
+  let emailSubject = form.find(field => field.type === 'emailSubject');
+  emailSubject = emailSubject && emailSubject.value;
+
   const file = form.find(field => field.type === 'file');
+
+  let email = form.find(field => field.type === 'Email');
+  email = email && email.value;
+
+  let name = form.find(field => field.label === 'Nombre');
+  name = name && name.value;
+
   const text = form
-    .map(field => {
-      if (field.type !== 'file') {
-        return `${field.label}: ${field.value}`;
+    .map(element => {
+      if (element.label && element.type !== 'file') {
+        return `${element.label}: ${element.value}`;
       }
     })
     .join('\r\n');
 
   // const from = name && email ? `${name} <${email}>` : `${name || email}`;
-  const from = `${'Dorronsoro'} <${'test@dorronsoro.com.ar'}>`;
+  const from = `${name || 'Macer'} <${email || 'contacto@macerstore.com/'}>`;
   // const message = {
   //   from,
   //   to: 'kevin@thecouch.nyc',
@@ -32,15 +45,15 @@ const send = form => {
   // };
   const message = {
     from,
-    to: 'juan.laria@gmail.com',
-    subject: `New message from ${from}`,
+    to: emailsList,
+    subject: emailSubject || `Nuevo mensaje de ${from}`,
     text,
-    attachments: file && [
-      {
-        filename: file.value.filename,
-        content: fs.createReadStream(file.value.path),
-      },
-    ],
+    // attachments: file && [
+    //   {
+    //     filename: file.value.filename,
+    //     content: fs.createReadStream(file.value.path),
+    //   },
+    // ],
     replyTo: from,
   };
 
