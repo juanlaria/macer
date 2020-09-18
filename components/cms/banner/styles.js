@@ -2,9 +2,19 @@ import styled from '@emotion/styled';
 import { screenSMmax, screenMDmin } from '../../../shared/breakpoints';
 
 export const BannerSection = styled('section')`
+  overflow: hidden;
+  
+  @media (max-width: ${screenSMmax}) {
+    margin-top: 2rem;
+  }
+
   p {
     font-size: 1rem;
     line-height: 1.6;
+    
+    @media (max-width: ${screenSMmax}) {
+      font-size: 0.8rem;
+    }
 
     h2 + & {
       margin-top: 0.5rem;
@@ -21,6 +31,10 @@ export const BannerSection = styled('section')`
 
     img {
       background-color: var(--color-grey);
+
+      @media (max-width: ${screenSMmax}) {
+        border-radius: 4px;
+      }
     }
   }
 `;
@@ -46,5 +60,8 @@ export const Wrapper = styled('div')`
     .-right & {
       flex-direction: row-reverse;
     }
+  }
+  @media (max-width: ${screenSMmax}) {
+    margin-top: -4rem;
   }
 `;

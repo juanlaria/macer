@@ -1,5 +1,9 @@
 import styled from '@emotion/styled';
-import { screenSMmax, screenMDmin } from '../../../shared/breakpoints';
+import {
+  screenSMmin,
+  screenSMmax,
+  screenMDmin,
+} from '../../../shared/breakpoints';
 
 export const HeaderSection = styled('header')`
   position: fixed;
@@ -8,7 +12,7 @@ export const HeaderSection = styled('header')`
   align-items: center;
   width: 100%;
   height: ${props =>
-    props.scrolled ? 'calc(var(--header-size) / 1.25)' : 'var(--header-size)'};
+    props.scrolled ? 'var(--header-size)' : 'calc(var(--header-size) * 1.25)'};
   z-index: 2;
   background-color: white;
   box-shadow: ${props =>
@@ -18,11 +22,14 @@ export const HeaderSection = styled('header')`
 
   picture {
     img {
-      max-height: ${props =>
-        props.scrolled ? '50px' : '58px'};
+      max-height: 32px;
       object-fit: contain;
       object-position: left;
       transition: max-height 400ms ease-in-out;
+
+      @media (min-width: ${screenMDmin}) {
+        max-height: ${props => (props.scrolled ? '50px' : '58px')};
+      }
     }
   }
 `;
@@ -60,14 +67,41 @@ export const SkipToContent = styled('div')`
 `;
 
 export const Nav = styled('nav')`
+  display: flex;
+  align-items: center;
+
+  .nav-button {
+    @media (min-width: ${screenMDmin}) {
+      display: none;
+    }
+  }
+
   ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+
+    /* Small devices (phones, 480px and up) */
+    @media (min-width: ${screenSMmin}) {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
 
     @media (max-width: ${screenSMmax}) {
-      display: none;
-      padding-left: 0;
+      transform: translateY(
+        ${props =>
+          props.isOpen ? '0' : 'calc(-100% - (var(--header-size) * 1.25))'}
+      );
+
+      position: absolute;
+      top: var(--header-size);
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: white;
     }
 
     @media (min-width: ${screenMDmin}) {
@@ -78,10 +112,11 @@ export const Nav = styled('nav')`
   }
 
   li {
+    @media (max-width: ${screenSMmax}) {
+      margin-top: 1.6rem;
+    }
+
     & + li {
-      @media (max-width: ${screenSMmax}) {
-        margin-top: 0.5rem;
-      }
       @media (min-width: ${screenMDmin}) {
         margin-left: 2.1rem;
       }
@@ -89,6 +124,8 @@ export const Nav = styled('nav')`
 
     a {
       text-decoration: none;
+      font-size: 1rem;
+      line-height: 1.6;
       font-weight: 600;
     }
   }

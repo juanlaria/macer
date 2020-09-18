@@ -1,7 +1,30 @@
 import styled from '@emotion/styled';
-import { screenSMmax, screenMDmin } from '../../../shared/breakpoints';
+import { Container } from '../../../shared/styles';
+import { screenXSmax, screenSMmax } from '../../../shared/breakpoints';
 
 export const CarouselSection = styled('section')`
+  ${Container} {
+    @media (max-width: ${screenSMmax}) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  .slick-slide {
+    img {
+      width: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+
+      @media (max-width: ${screenXSmax}) {
+        height: 230px;
+      }
+
+      @media (max-width: ${screenSMmax}) {
+        height: 300px;
+        border-radius: 0;
+      }
+    }
+  }
   .slick-arrow {
     position: absolute;
     top: 50%;
@@ -16,6 +39,11 @@ export const CarouselSection = styled('section')`
     cursor: pointer;
     box-shadow: var(--elevation-z2);
     transition: var(--transition-elevation);
+
+    @media (max-width: ${screenSMmax}) {
+      height: 1.6rem;
+      width: 1.6rem;
+    }
 
     &:hover,
     &:focus {
@@ -35,11 +63,20 @@ export const CarouselSection = styled('section')`
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+
+      @media (max-width: ${screenSMmax}) {
+        height: 0.6rem;
+        width: 0.3rem;
+      }
     }
   }
 
   .slick-prev {
     left: 1.2rem;
+    
+    @media (max-width: ${screenSMmax}) {
+      left: 0.6rem;
+    }
 
     &:before {
       left: calc(50% - 0.1rem);
@@ -48,6 +85,10 @@ export const CarouselSection = styled('section')`
 
   .slick-next {
     right: 1.2rem;
+    
+    @media (max-width: ${screenSMmax}) {
+      right: 0.6rem;
+    }
 
     &:before {
       left: calc(50% + 0.1rem);
@@ -66,6 +107,10 @@ export const CarouselSection = styled('section')`
     transform: translateX(-50%);
     z-index: 1;
     margin-bottom: 1.2rem;
+    
+    @media (max-width: ${screenSMmax}) {
+      margin-bottom: 0.6rem;
+    }
 
     li {
       display: inline-block;
@@ -78,6 +123,11 @@ export const CarouselSection = styled('section')`
       box-shadow: var(--elevation-z2);
       transition: var(--transition-elevation);
 
+      @media (max-width: ${screenSMmax}) {
+        height: 0.4rem;
+        width: 0.4rem;
+      }
+
       &:hover,
       &:focus {
         box-shadow: var(--elevation-z4);
@@ -85,6 +135,10 @@ export const CarouselSection = styled('section')`
 
       & + li {
         margin-left: 0.6rem;
+
+        @media (max-width: ${screenSMmax}) {
+          margin-left: 0.4rem;
+        }
       }
 
       &.slick-active {

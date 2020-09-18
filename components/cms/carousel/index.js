@@ -6,7 +6,8 @@ import { Container } from '../../../shared/styles';
 import Image from '../../image';
 import { CarouselSection } from './styles';
 
-const Carousel = ({ items, className }) => {
+const Carousel = ({ primary: { component_id },  items, className }) => {
+  const id = component_id && (RichText.asText(component_id) || null);
   const settings = {
     dots: true,
     slidesToShow: 1,
@@ -22,7 +23,7 @@ const Carousel = ({ items, className }) => {
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
         />
       </Head>
-      <CarouselSection className={className}>
+      <CarouselSection id={id} className={className}>
         <Container>
           <Slider {...settings}>
             {items.map((item, index) => {

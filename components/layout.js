@@ -29,7 +29,7 @@ const Layout = ({
           <section className="back-section">
             <Container>
               <Link href="/" as="/">
-                Volver al inicio
+                <a>Volver al inicio</a>
               </Link>
             </Container>
           </section>
