@@ -76,7 +76,7 @@ position: relative;
 font-size: 0.8rem;
 line-height: 1.5;
 font-style: normal;
-font-weight: normal;
+font-weight: 400;
 color: var(--color-grey);
 
 @media (min-width: ${screenSMmin}) {
