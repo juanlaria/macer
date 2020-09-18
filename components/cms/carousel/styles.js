@@ -13,6 +13,7 @@ export const CarouselSection = styled('section')`
     img {
       width: 100%;
       object-fit: cover;
+      height: 375px;
       border-radius: 4px;
 
       @media (max-width: ${screenXSmax}) {
