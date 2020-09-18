@@ -28,6 +28,20 @@ const Image = ({ data, fit, width, height, loading, className }) => {
     height: height || dimensions.height || false,
   };
 
+  if(url && url.includes('.svg')) {
+    return (
+      <picture className={className}>
+        <img
+          src={url}
+          alt={alt || ''}
+          width={img.width}
+          height={img.height}
+          loading={loading}
+        />
+      </picture>
+    );
+  }
+
   // The first render will try to load a bad quality image blurred. Then, when in view, it will load the best
   // quality and display it as soon is ready.
   let resizedUrl = url;
