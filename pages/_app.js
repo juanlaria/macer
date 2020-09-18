@@ -5,6 +5,8 @@ import { CacheProvider } from '@emotion/core'
 // Use only { cache } from 'emotion'. Don't use { css }.
 import { cache } from 'emotion'
 
+import 'react-image-lightbox/style.css';
+
 import { globalStyles } from '../shared/styles'
 
 export default class App extends NextApp {
