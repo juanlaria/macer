@@ -2,7 +2,9 @@ import { keyframes, css, Global } from '@emotion/core';
 import styled from '@emotion/styled';
 import {
   screenSMmin,
+  screenSMmax,
   screenMDmin,
+  screenMDmax,
   screenLGmin,
   screenXLmin,
 } from './breakpoints';
@@ -18,20 +20,31 @@ export const globalStyles = (
         --color-white: #ffffff;
         --color-yellow: #ffcb08;
         --color-darkYellow: #edbb0c;
+        --color-red: #ff0808;
 
         --border-radius: 8px;
-        --header-size: 6rem;
+
+        --header-size: 3rem;
+
+        @media (min-width: ${screenMDmin}) {
+          --header-size: 5rem;
+        }
+
+        --font-primary: 'Hind', Helvetica, Arial, sans-serif;
 
         --elevation-z1: 0 2px 1px -1px rgba(33, 33, 33, 0.1),
           0 1px 1px 0 rgba(33, 33, 33, 0.07), 0 1px 3px 0 rgba(33, 33, 33, 0.05);
         --elevation-z2: 0 3px 1px -2px rgba(33, 33, 33, 0.1),
           0 2px 2px 0 rgba(33, 33, 33, 0.07), 0 1px 5px 0 rgba(33, 33, 33, 0.05);
         --elevation-z4: 0 2px 4px -1px rgba(33, 33, 33, 0.1),
-          0 4px 5px 0 rgba(33, 33, 33, 0.07), 0 1px 10px 0 rgba(33, 33, 33, 0.05);
+          0 4px 5px 0 rgba(33, 33, 33, 0.07),
+          0 1px 10px 0 rgba(33, 33, 33, 0.05);
         --elevation-z6: 0 3px 5px -1px rgba(33, 33, 33, 0.1),
-          0 6px 10px 0 rgba(33, 33, 33, 0.07), 0 1px 18px 0 rgba(33, 33, 33, 0.05);
+          0 6px 10px 0 rgba(33, 33, 33, 0.07),
+          0 1px 18px 0 rgba(33, 33, 33, 0.05);
         --elevation-z8: 0 5px 5px -3px rgba(33, 33, 33, 0.1),
-          0 8px 10px 1px rgba(33, 33, 33, 0.07), 0 3px 14px 2px rgba(33, 33, 33, 0.05);
+          0 8px 10px 1px rgba(33, 33, 33, 0.07),
+          0 3px 14px 2px rgba(33, 33, 33, 0.05);
         --elevation-z12: 0 7px 8px -4px rgba(33, 33, 33, 0.1),
           0 12px 17px 2px rgba(33, 33, 33, 0.07),
           0 5px 22px 4px rgba(33, 33, 33, 0.05);
@@ -46,6 +59,10 @@ export const globalStyles = (
         box-sizing: border-box;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       html,
       body,
       #__next {
@@ -53,7 +70,7 @@ export const globalStyles = (
         background: var(--color-white);
         color: var(--color-black);
         height: 100%;
-        font-family: Helvetica, Arial, sans-serif;
+        font-family: var(--font-primary);
         font-size: 20px;
       }
 
@@ -70,12 +87,16 @@ export const globalStyles = (
         min-height: 100vh;
 
         header + & {
-          padding-top: var(--header-size);
+          padding-top: calc(var(--header-size) * 1.25);
         }
 
         .back-section {
           padding-top: 2.8rem;
           padding-bottom: 2rem;
+          
+          @media (max-width: ${screenSMmax}) {
+            display: none;
+          }
 
           a,
           button {
@@ -104,8 +125,12 @@ export const globalStyles = (
           flex: 1;
         }
 
-        .component{
+        .component {
           padding: 2.2rem 0;
+
+          @media (max-width: ${screenSMmax}) {
+            padding: 2rem 0;
+          }
 
           &:first-of-type {
             padding-top: 0;
@@ -118,8 +143,9 @@ export const globalStyles = (
         }
 
         .title {
-          font-size: 1.6rem;
-          line-height: 1.25;
+          @media (max-width: ${screenLGmin}) {
+            font-size: 1.6rem;
+          }
         }
 
         &.-error-page {
@@ -150,14 +176,29 @@ export const globalStyles = (
         }
       }
 
+      #main {
+        header + & {
+          padding-top: calc(var(--header-size) * 1.25);
+        }
+      }
+
       .component {
         position: relative;
         z-index: 1;
         padding: 4.4rem 0;
         background-color: var(--color-white);
 
+        @media (max-width: ${screenSMmax}) {
+          padding: 2rem 0;
+        }
+
         &.-grey {
           background-color: var(--color-lightGrey);
+        }
+
+        .anchor {
+          position: absolute;
+          top: calc(var(--header-size) * -1);
         }
       }
 
@@ -176,21 +217,30 @@ export const globalStyles = (
         font-size: 2.4rem;
         line-height: 1.25;
         margin-bottom: 0.4em;
+
+        @media (max-width: ${screenMDmax}) {
+          font-size: 2rem;
+        }
+
+        @media (max-width: ${screenSMmax}) {
+          font-size: 1.6rem;
+        }
       }
 
-      p {
+      p,
+      ul {
         margin: 0;
         font-size: 1rem;
         line-height: 1.6;
         color: var(--color-grey);
 
+        @media (max-width: ${screenSMmax}) {
+          font-size: 0.8rem;
+        }
+
         & + & {
           margin-top: 1em;
         }
-      }
-
-      ul {
-        margin: 0;
       }
 
       a {
@@ -207,13 +257,25 @@ export const globalStyles = (
         text-align: center;
         padding: 0.8rem 1.6rem;
         background: var(--color-yellow);
+        border: 2px solid transparent;
         border-radius: var(--border-radius);
         box-shadow: var(--elevation-z2);
+        outline: none;
         transition: var(--transition-elevation);
+
+        @media (max-width: ${screenSMmax}) {
+          font-size: 0.8rem;
+          line-height: 1.5;
+          padding: 0.5rem 1.2rem;
+        }
 
         &:hover,
         &:focus {
           box-shadow: var(--elevation-z4);
+        }
+
+        &:focus {
+          border-color: var(--color-black);
         }
       }
 
@@ -251,7 +313,6 @@ export const globalStyles = (
   />
 );
 
-/* Visually hidden class */
 export const containerStyles = css`
   width: 100%;
   margin-left: auto;

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { screenSMmax, screenMDmin } from '../../../shared/breakpoints';
 
 export const BannerCardSection = styled('section')`
   padding: 0 !important;
@@ -32,11 +33,21 @@ export const Box = styled('div')`
   padding: 4rem 2rem;
   text-align: center;
 
+  @media (max-width: ${screenSMmax}) {
+    padding: 1.6rem 0.8rem;
+  }
+
   .title {
-    font-size: 2.4rem !important;
+    @media (min-width: ${screenMDmin}) {
+      font-size: 2.4rem !important;
+    }
   }
 
   .button {
-    margin-top: 2.4rem;
+    margin-top: 1.6rem;
+
+    @media (min-width: ${screenMDmin}) {
+      margin-top: 2.4rem;
+    }
   }
 `;

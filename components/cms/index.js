@@ -7,6 +7,7 @@ import { default as banner_card } from './bannerCard';
 import { default as cards } from './linkCards';
 import { default as logos } from './logos';
 import { default as carrusel } from './carousel';
+import { default as formulario } from './form';
 import { default as header } from './header';
 import { default as footer } from './footer';
 
@@ -19,6 +20,7 @@ export default {
   banner_card,
   cards,
   logos,
+  formulario,
   carrusel,
   footer,
 };

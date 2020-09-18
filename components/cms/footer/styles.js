@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { screenSMmax, screenMDmin, screenMDmax } from '../../../shared/breakpoints';
 
 export const FooterSection = styled('footer')`
   margin-top: auto;
@@ -7,18 +8,33 @@ export const FooterSection = styled('footer')`
 
   background: var(--color-black);
   color: var(--color-white);
+  
+  @media (max-width: ${screenSMmax}) {
+    flex-direction: column;
+    padding-top: 1.6rem;
+    padding-bottom: 1.6rem;
+  }
 `;
 
 export const Columns = styled('div')`
   display: flex;
   justify-content: space-between;
+  
+  @media (max-width: ${screenSMmax}) {
+    flex-direction: column;
+  }
 `;
 
 export const LogosWrapper = styled('div')`
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
+  margin-bottom: 1.2rem;
+  
+  @media (min-width: ${screenMDmin}) {
+    flex-direction: column;
+    margin-bottom: 0;
+  }
 `;
 
 export const LinksWrapper = styled('div')`
@@ -26,7 +42,10 @@ export const LinksWrapper = styled('div')`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  padding-left: 2.5rem;
+
+  @media (min-width: ${screenMDmin}) {
+    padding-left: 2.5rem;
+  }
 `;
 
 export const ContactLinks = styled('ul')`
@@ -75,4 +94,7 @@ export const SocialLinks = styled('ul')`
 `;
 
 export const MapWrapper = styled('div')`
+  @media (max-width: ${screenMDmax}) {
+    display: none;
+  }
 `;
