@@ -61,6 +61,33 @@ export const globalStyles = (
 
       html {
         scroll-behavior: smooth;
+
+        @font-face {
+          font-family: 'Hind';
+          font-weight: 400;
+          src: local('Hind Regular'), local('Hind-Regular'),
+            url('/static/fonts/Hind-Regular.woff2') format('woff2'),
+            url('/static/fonts/Hind-Regular.ttf') format('truetype');
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: 'Hind';
+          font-weight: 600;
+          src: local('Hind SemiBold'), local('Hind-SemiBold'),
+            url('/static/fonts/Hind-SemiBold.woff2') format('woff2'),
+            url('/static/fonts/Hind-SemiBold.ttf') format('truetype');
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: 'Hind';
+          font-weight: 700;
+          src: local('Hind Bold'), local('Hind-Bold'),
+            url('/static/fonts/Hind-Bold.woff2') format('woff2'),
+            url('/static/fonts/Hind-Bold.ttf') format('truetype');
+          font-display: swap;
+        }
       }
 
       html,
@@ -93,7 +120,7 @@ export const globalStyles = (
         .back-section {
           padding-top: 2.8rem;
           padding-bottom: 2rem;
-          
+
           @media (max-width: ${screenSMmax}) {
             display: none;
           }
