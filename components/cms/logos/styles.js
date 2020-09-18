@@ -39,7 +39,7 @@ export const Columns = styled('ul')`
 `;
 
 export const ImageWrapper = styled('li')`
-  background-color: var(--color-grey);
+  height: 100%;
 
   img {
     width: 100%;
