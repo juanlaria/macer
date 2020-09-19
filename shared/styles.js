@@ -60,8 +60,6 @@ export const globalStyles = (
       }
 
       html {
-        scroll-behavior: smooth;
-
         @font-face {
           font-family: 'Hind';
           font-weight: 400;
