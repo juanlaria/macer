@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { RichText } from 'prismic-reactjs';
 import Head from 'next/head';
 import Slider from 'react-slick';
@@ -9,26 +9,38 @@ import Image from '../../image';
 import { CarouselSection } from './styles';
 
 const Carousel = ({ primary: { component_id }, items, className }) => {
-  const [current, setCurrent] = useState(null);
+  const [current, setCurrent] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+  const sliderEl = useRef(null);
   const id = component_id && (RichText.asText(component_id) || null);
+
+  const onSliderChange = newIndex => {
+    setCurrent(newIndex);
+  };
+
   const settings = {
     dots: true,
     slidesToShow: 1,
     slidesToScroll: 1,
+    afterChange: onSliderChange,
   };
 
-  const handleClickImage = (e, image) => {
-    console.log(image);
+  const handleClickImage = e => {
     e && e.preventDefault();
 
-    setCurrent(image);
+    setIsOpen(true);
   };
 
   const handleCloseModal = e => {
     e && e.preventDefault();
 
-    setCurrent(null);
+    setIsOpen(false);
   };
+
+  useEffect(() => {
+    sliderEl.current.slickGoTo(current);
+  }, [current]);
+
   return (
     <>
       <Head>
@@ -41,18 +53,27 @@ const Carousel = ({ primary: { component_id }, items, className }) => {
       </Head>
       <CarouselSection id={id} className={className}>
         <Container>
-          <Slider {...settings}>
+          <Slider ref={sliderEl} {...settings}>
             {items.map((item, index) => {
               return (
-                <div key={index} onClick={e => handleClickImage(e, item.carousel_image)}>
+                <div key={index} onClick={e => handleClickImage(e)}>
                   <Image data={item.carousel_image} loading="lazy" />
                 </div>
               );
             })}
           </Slider>
 
-          {current && (
-            <Lightbox mainSrc={current.url} onCloseRequest={handleCloseModal} />
+          {isOpen && (
+            <Lightbox
+              mainSrc={items[current].carousel_image.url}
+              nextSrc={
+                current < items.length - 1 && items[current + 1].carousel_image.url
+              }
+              prevSrc={current > 0 && items[current - 1].carousel_image.url}
+              onMovePrevRequest={() => setCurrent(current - 1)}
+              onMoveNextRequest={() => setCurrent(current + 1)}
+              onCloseRequest={handleCloseModal}
+            />
           )}
         </Container>
       </CarouselSection>
