@@ -6,7 +6,10 @@ import { hrefResolver, linkResolver } from '../prismic-configuration';
 const Link = ({ link, hash, children, className }) => {
   let result = '';
   const hashText = hash && RichText.asText(hash);
-  const url = link.link_type === 'Document' ? hrefResolver(link) : PrismicLink.url(link, linkResolver);
+  const url =
+    link.link_type === 'Document'
+      ? hrefResolver(link)
+      : PrismicLink.url(link, linkResolver);
   const urlWithHash = `${url ? url : '/'}${hashText ? `#${hashText}` : ''}`;
 
   if (link.link_type === 'Document') {
@@ -34,6 +37,6 @@ Link.propTypes = {
 
 Link.defaultTypes = {
   classname: null,
-}
+};
 
 export default Link;
