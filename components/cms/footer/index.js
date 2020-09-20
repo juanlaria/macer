@@ -72,7 +72,7 @@ const Footer = ({
               height="287"
               frameborder="0"
               src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCvzh1iBLgY84c5c-jdPPR6Mmk1cgg6SiI&q=MACER+-+Sistemas+de+Almacenamiento"
-              allowfullscreen
+              allowFullScreen
             ></iframe>
           </MapWrapper>
         </Columns>
