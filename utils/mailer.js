@@ -48,7 +48,7 @@ const send = form => {
     to: emailsList,
     subject: emailSubject || `Nuevo mensaje de ${from}`,
     text,
-    attachments: file && [
+    attachments: file && file.value && [
       {
         filename: file.value.filename,
         path: file.value.content,

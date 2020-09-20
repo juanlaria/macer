@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { RichText } from 'prismic-reactjs';
 import { useForm } from 'react-hook-form';
@@ -39,6 +39,7 @@ const Form = ({
   }
   const [formStatus, setFormStatus] = useState('INITIAL');
   const [formFields, setFormFields] = useState(initializeFields);
+  const [submitButtonText, setSubmitButtonText] = useState('Enviar');
   const [file, setFile] = useState(null);
   const id = component_id && (RichText.asText(component_id) || null);
   const { handleSubmit, register, errors } = useForm();
@@ -59,10 +60,14 @@ const Form = ({
     const getFormValue = async (formField, formSubmitted) => {
       let currentField = formField;
       if (currentField.type === 'file') {
-        currentField.value = {
-          filename: formSubmitted[currentField.id][0]?.name,
-          content: await getFile(formSubmitted[currentField.id][0])}
-          ;
+        if (formSubmitted[currentField.id].length) {
+          currentField.value = {
+            filename: formSubmitted[currentField.id][0]?.name,
+            content: await getFile(formSubmitted[currentField.id][0]),
+          };
+        } else {
+          currentField.value = null;
+        }
       } else {
         currentField.value = formSubmitted[currentField.id];
       }
@@ -97,13 +102,27 @@ const Form = ({
     });
   };
 
+  useEffect(() => {
+    switch (formStatus) {
+      case 'SUBMITTED':
+        setSubmitButtonText('¡Enviado!');
+        break;
+      case 'FAILED':
+        setSubmitButtonText('Volver a intentar');
+        setFormFields(initializeFields);
+        break;
+      default:
+      case 'INITIAL':
+        setFormFields(initializeFields);
+        break;
+    }
+  }, [formStatus]);
+
   return (
     <FormSection className={className}>
       <div id={id} className="anchor" />
       <Container>
-        <FormWrapper
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <FormWrapper onSubmit={handleSubmit(onSubmit)}>
           {formFields &&
             formFields.map(field => {
               if (field.type !== 'file') {
@@ -123,8 +142,8 @@ const Form = ({
               return false;
             })}
           <CtaWrapper>
-            <Submit type="submit" className="button">
-              Submit
+            <Submit type="submit" className="button" disabled={formStatus === 'SUBMITTED'}>
+              {submitButtonText}
             </Submit>
             {formFields.map(field => {
               if (field.type === 'file') {
