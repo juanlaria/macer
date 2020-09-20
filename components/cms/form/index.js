@@ -39,24 +39,52 @@ const Form = ({
   }
   const [formStatus, setFormStatus] = useState('INITIAL');
   const [formFields, setFormFields] = useState(initializeFields);
+  const [file, setFile] = useState(null);
   const id = component_id && (RichText.asText(component_id) || null);
   const { handleSubmit, register, errors } = useForm();
-  const onSubmit = submittedForm => {
-    const formValues = formFields.map(formField => {
+
+  const getFile = formFile => {
+    return new Promise((resolve, reject) => {
+      var reader = new FileReader();
+
+      reader.onload = () => {
+        var data = reader.result;
+        resolve(data);
+      };
+      reader.readAsDataURL(formFile);
+    });
+  };
+
+  const getFormValues = async (formState, formSubmitted) => {
+    const getFormValue = async (formField, formSubmitted) => {
       let currentField = formField;
       if (currentField.type === 'file') {
         currentField.value = {
-          filename: submittedForm[currentField.id][0]?.name,
-          path: submittedForm[currentField.id][0]?.name,
-        };
+          filename: formSubmitted[currentField.id][0]?.name,
+          content: await getFile(formSubmitted[currentField.id][0])}
+          ;
       } else {
-        currentField.value = submittedForm[currentField.id];
+        currentField.value = formSubmitted[currentField.id];
       }
-
       return currentField;
+    };
+
+    return Promise.all(
+      formState.map(formField => getFormValue(formField, formSubmitted))
+    );
+  };
+
+  const onSubmit = async submittedForm => {
+    const formValues = await getFormValues(formFields, submittedForm);
+    formValues.push({
+      type: 'emailsList',
+      value: RichText.asText(emails_list),
     });
-    formValues.push({ type: 'emailsList', value: RichText.asText(emails_list) });
-    formValues.push({ type: 'emailSubject', value: RichText.asText(email_subject) });
+    formValues.push({
+      type: 'emailSubject',
+      value: RichText.asText(email_subject),
+    });
+
     fetch('/api/contact', {
       method: 'post',
       headers: {
@@ -74,7 +102,6 @@ const Form = ({
       <div id={id} className="anchor" />
       <Container>
         <FormWrapper
-          enctype="multipart/form-data"
           onSubmit={handleSubmit(onSubmit)}
         >
           {formFields &&
