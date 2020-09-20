@@ -120,7 +120,8 @@ export const globalStyles = (
           padding-bottom: 2rem;
 
           @media (max-width: ${screenSMmax}) {
-            display: none;
+            padding-top: 1.8rem;
+            padding-bottom: 1rem;
           }
 
           a,
