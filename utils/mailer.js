@@ -48,12 +48,12 @@ const send = form => {
     to: emailsList,
     subject: emailSubject || `Nuevo mensaje de ${from}`,
     text,
-    // attachments: file && [
-    //   {
-    //     filename: file.value.filename,
-    //     content: fs.createReadStream(file.value.path),
-    //   },
-    // ],
+    attachments: file && [
+      {
+        filename: file.value.filename,
+        path: file.value.content,
+      },
+    ],
     replyTo: from,
   };
 
