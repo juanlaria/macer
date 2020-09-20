@@ -6,14 +6,16 @@ export const config = {
       sizeLimit: '20mb',
     },
   },
-}
+};
 
 export default (req, res) => {
   mailer(req.body)
     .then(() => {
+      res.status(200);
       res.send('success');
     })
     .catch(error => {
-      res.send('badddd');
+      res.status(500);
+      res.send('error');
     });
 };

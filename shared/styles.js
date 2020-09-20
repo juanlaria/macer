@@ -274,6 +274,7 @@ export const globalStyles = (
       }
 
       .button {
+        cursor: pointer;
         display: inline-block;
         font-weight: 600;
         font-size: 1rem;
@@ -293,6 +294,12 @@ export const globalStyles = (
           font-size: 0.8rem;
           line-height: 1.5;
           padding: 0.5rem 1.2rem;
+        }
+
+
+        &[disabled] {
+          opacity: 0.5;
+          cursor: not-allowed;
         }
 
         &:hover,
