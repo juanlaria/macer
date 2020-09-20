@@ -50,6 +50,7 @@ const send = form => {
     text,
     attachments: file && [
       {
+        filename: file.value.filename,
         path: file.value.content,
       },
     ],
