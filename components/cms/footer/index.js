@@ -67,7 +67,13 @@ const Footer = ({
             )}
           </LinksWrapper>
           <MapWrapper>
-            <img src="http://via.placeholder.com/456x287" alt="" />
+            <iframe
+              width="456"
+              height="287"
+              frameborder="0"
+              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCvzh1iBLgY84c5c-jdPPR6Mmk1cgg6SiI&q=MACER+-+Sistemas+de+Almacenamiento"
+              allowfullscreen
+            ></iframe>
           </MapWrapper>
         </Columns>
       </Container>
