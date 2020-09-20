@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { screenSMmax, screenMDmin, screenMDmax } from '../../../shared/breakpoints';
+import { screenXXSmax, screenSMmax, screenMDmin, screenMDmax, screenLGmax } from '../../../shared/breakpoints';
 
 export const FooterSection = styled('footer')`
   margin-top: auto;
@@ -34,6 +34,12 @@ export const LogosWrapper = styled('div')`
   @media (min-width: ${screenMDmin}) {
     flex-direction: column;
     margin-bottom: 0;
+  }
+  
+  @media (max-width: ${screenSMmax}) {
+    picture + picture {
+      margin-left: 2rem;
+    }
   }
 `;
 
@@ -76,6 +82,14 @@ export const ContactLinks = styled('ul')`
 
     p {
       color: var(--color-white);
+
+      @media (max-width: ${screenLGmax}) {
+        font-size: 0.8rem;
+      }
+
+      @media (max-width: ${screenXXSmax}) {
+        font-size: 0.6rem;
+      }
     }
   }
 `;
@@ -83,6 +97,7 @@ export const ContactLinks = styled('ul')`
 export const SocialLinks = styled('ul')`
   padding: 0;
   margin: 0;
+  margin-top: 1rem;
   list-style: none;
   display: flex;
 
@@ -94,7 +109,15 @@ export const SocialLinks = styled('ul')`
 `;
 
 export const MapWrapper = styled('div')`
+  display: flex;
+  flex: 1 25rem;
+  padding-left: 2.5rem;
+
   @media (max-width: ${screenMDmax}) {
     display: none;
+  }
+
+  iframe {
+    width: 100%;
   }
 `;
