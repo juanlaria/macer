@@ -84,7 +84,7 @@ export const Nav = styled('nav')`
     /* Small devices (phones, 480px and up) */
     @media (min-width: ${screenSMmin}) {
       padding-left: 2rem;
-      padding-right: 2rem;
+      padding-right: 0;
     }
 
     @media (max-width: ${screenSMmax}) {

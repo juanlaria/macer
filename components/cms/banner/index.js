@@ -6,7 +6,7 @@ import { useInView } from 'react-intersection-observer';
 import { Container } from '../../../shared/styles';
 import Image from '../../image';
 import Link from '../../link';
-import { BannerSection, Wrapper, TextSection } from './styles';
+import { BannerSection, VideoWrapper, Wrapper, TextSection } from './styles';
 
 const Banner = ({
   primary: {
@@ -14,6 +14,7 @@ const Banner = ({
     banner_title,
     banner_description,
     banner_image,
+    banner_video,
     banner_button_label,
     banner_button_link,
     banner_alignment: alignment,
@@ -44,7 +45,33 @@ const Banner = ({
       <div id={id} className="anchor" />
       <Container>
         <Wrapper>
-          {banner_image && (
+          {banner_video?.url && (
+            <motion.div
+              animate={controls}
+              initial="hidden"
+              variants={{
+                visible: { x: 0, opacity: 1 },
+                hidden: { x: alignment === 'Right' ? -20 : 20, opacity: 0 },
+              }}
+              transition={{
+                damping: 20,
+                stiffness: 25,
+                duration: 0.5,
+              }}
+            >
+              <VideoWrapper>
+                <iframe
+                  width="560"
+                  height="315"
+                  src={banner_video.url}
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </VideoWrapper>
+            </motion.div>
+          )}
+          {banner_image && !banner_video?.url && (
             <motion.div
               animate={controls}
               initial="hidden"
