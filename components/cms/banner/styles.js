@@ -3,9 +3,28 @@ import { screenSMmax, screenMDmin } from '../../../shared/breakpoints';
 
 export const BannerSection = styled('section')`
   overflow: hidden;
+
+  .component.-grey + & {
+    &:before {
+      background-color: var(--color-grey);
+    }
+  }
+
+  .component:not(.-grey) + & {
+    &:before {
+      background-color: var(--color-white);
+    }
+  }
   
   @media (max-width: ${screenSMmax}) {
-    margin-top: 2rem;
+    &:before {
+      content: '';
+      display: block;
+      height: 2rem;
+      width: 100%;
+      margin-top: -2rem;
+      background: red;
+    }
   }
 
   p {
@@ -39,6 +58,29 @@ export const BannerSection = styled('section')`
   }
 `;
 
+export const VideoWrapper = styled('div')`
+  position: relative;
+  height: 0;
+  padding-top: calc((9/16) * 100%);
+  box-shadow: var(--elevation-z4);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+
+  &:hover,
+  &:focus,
+  &:focus-within {
+    box-shadow: var(--elevation-z8);
+  }
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+`;
+
 export const TextSection = styled('div')`
   @media (min-width: ${screenMDmin}) {
     display: flex;
@@ -62,6 +104,6 @@ export const Wrapper = styled('div')`
     }
   }
   @media (max-width: ${screenSMmax}) {
-    margin-top: -4rem;
+    margin-top: -2rem;
   }
 `;

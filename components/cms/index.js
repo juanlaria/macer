@@ -8,6 +8,7 @@ import { default as cards } from './linkCards';
 import { default as logos } from './logos';
 import { default as carrusel } from './carousel';
 import { default as acordeon } from './accordion';
+import { default as video } from './video';
 import { default as formulario } from './form';
 import { default as header } from './header';
 import { default as footer } from './footer';
@@ -22,6 +23,7 @@ export default {
   cards,
   logos,
   acordeon,
+  video,
   formulario,
   carrusel,
   footer,
