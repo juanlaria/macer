@@ -10,6 +10,8 @@ export const CarouselSection = styled('section')`
     }
   }
   .slick-slide {
+    cursor: pointer;
+
     img {
       width: 100%;
       object-fit: cover;
