@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 
-const { PUBLIC_NAME } = process.env;
+const { NEXT_PUBLIC_NAME } = process.env;
 
 const GeneralCard = ({ canonical, title, description, image }) => {
   return (
@@ -11,7 +11,7 @@ const GeneralCard = ({ canonical, title, description, image }) => {
       {description && <meta name="og:description" content={description} />}
       {image && <meta name="og:image" content={image.url} />}
       <meta property="og:type" content="website" />
-      <meta property="og:site_name" content={PUBLIC_NAME} />
+      <meta property="og:site_name" content={NEXT_PUBLIC_NAME} />
     </Head>
   );
 };

@@ -6,8 +6,8 @@ let transporter = nodemailer.createTransport({
   port: 465,
   secure: true, // true for 465, false for other ports
   auth: {
-    user: 'test@dorronsoro.com.ar', // generated ethereal user
-    pass: 'Coliflor7', // generated ethereal password
+    user: 'test@dorronsoro.com.ar',
+    pass: 'Coliflor7',
   },
 });
 
@@ -35,7 +35,7 @@ const send = form => {
     .join('\r\n');
 
   // const from = name && email ? `${name} <${email}>` : `${name || email}`;
-  const from = `${name || 'Macer'} <${email || 'contacto@macerstore.com/'}>`;
+  const from = `${name || 'Macer'} <${email || 'info@macerstore.com'}>`;
   // const message = {
   //   from,
   //   to: 'kevin@thecouch.nyc',
