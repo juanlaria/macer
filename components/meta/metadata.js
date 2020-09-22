@@ -1,13 +1,13 @@
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 
-const { PUBLIC_NAME } = process.env;
+const { NEXT_PUBLIC_NAME } = process.env;
 
 const Metadata = ({ title, canonical, description, keywords, indexing }) => {
-  const pageTitle = title ? `${title} - ${PUBLIC_NAME}` : false;
+  const pageTitle = title ? `${title} - ${NEXT_PUBLIC_NAME}` : false;
   return (
     <Head>
-      <title>{pageTitle || PUBLIC_NAME}</title>
+      <title>{pageTitle || NEXT_PUBLIC_NAME}</title>
       {canonical && <link rel="canonical" href={canonical} />}
       {description && <meta name="description" content={description} />}
       {keywords && <meta name="keywords" content={keywords} />}
