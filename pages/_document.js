@@ -1,7 +1,7 @@
 import Document, { Head, Main, NextScript } from 'next/document';
 import { extractCritical } from 'emotion-server';
 
-const { PUBLIC_NAME, PRISMIC_REPOSITORY_NAME, NODE_ENV } = process.env;
+const { NEXT_PUBLIC_NAME, PRISMIC_REPOSITORY_NAME, NODE_ENV } = process.env;
 
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
@@ -19,7 +19,7 @@ export default class MyDocument extends Document {
   render() {
     return (
       <html lang={this.lang} dir="ltr">
-        <meta name="application-name" content={PUBLIC_NAME} />
+        <meta name="application-name" content={NEXT_PUBLIC_NAME} />
         <meta name="theme-color" content="#FFFFFF" />
 
         <link
