@@ -2,12 +2,12 @@ const nodemailer = require('nodemailer');
 var fs = require('fs');
 
 let transporter = nodemailer.createTransport({
-  host: 'c1550256.ferozo.com',
+  host: 'mail.macerstore.com',
   port: 465,
   secure: true, // true for 465, false for other ports
   auth: {
-    user: 'test@dorronsoro.com.ar',
-    pass: 'Coliflor7',
+    user: 'info@macerstore.com',
+    pass: 'm201217',
   },
 });
 
