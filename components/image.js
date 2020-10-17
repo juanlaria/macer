@@ -24,8 +24,8 @@ const Image = ({ data, fit, width, height, loading, className }) => {
   }, [ready]);
 
   const img = {
-    width: width || dimensions.width || false,
-    height: height || dimensions.height || false,
+    width: width || dimensions?.width || false,
+    height: height || dimensions?.height || false,
   };
 
   if(url && url.includes('.svg')) {
