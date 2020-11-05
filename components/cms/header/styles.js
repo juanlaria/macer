@@ -14,7 +14,7 @@ export const HeaderSection = styled('header')`
   height: ${props =>
     props.scrolled ? 'var(--header-size)' : 'calc(var(--header-size) * 1.25)'};
   z-index: 2;
-  background-color: white;
+  background-color: var(--color-black);
   box-shadow: ${props =>
     props.scrolled ? 'var(--elevation-z12)' : 'var(--elevation-z8)'};
   : ;
@@ -51,8 +51,8 @@ export const SkipToContent = styled('div')`
   a {
     position: absolute;
     top: 0;
-    background: black;
-    color: white;
+    background: var(--color-black);
+    color: var(--color-white);
     text-decoration: none;
     padding: 1rem;
     transform: translateY(-100%);
@@ -99,7 +99,7 @@ export const Nav = styled('nav')`
       right: 0;
       width: 100%;
       height: 100vh;
-      background-color: white;
+      background-color: var(--color-black);
     }
 
     @media (min-width: ${screenMDmin}) {
@@ -120,11 +120,12 @@ export const Nav = styled('nav')`
       }
     }
 
-    a {
+    a:not(.button) {
       text-decoration: none;
       font-size: 1rem;
       line-height: 1.6;
       font-weight: 600;
+      color: var(--color-white);
     }
   }
 `;
