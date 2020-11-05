@@ -47,6 +47,8 @@ export const BannerSection = styled('section')`
   picture {
     display: flex;
     align-items: center;
+    max-height: 400px;
+    overflow: hidden;
 
     img {
       background-color: var(--color-grey);
@@ -86,6 +88,11 @@ export const TextSection = styled('div')`
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    .-right & {
+      grid-column: 1;
+      grid-row: 1;
+    }
   }
 
   @media (max-width: ${screenSMmax}) {
@@ -98,10 +105,6 @@ export const Wrapper = styled('div')`
     display: grid;
     grid-template-columns: repeat(2,1fr);
     grid-gap: 1.2rem;
-
-    .-right & {
-      flex-direction: row-reverse;
-    }
   }
   @media (max-width: ${screenSMmax}) {
     margin-top: -2rem;
