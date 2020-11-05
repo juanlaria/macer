@@ -6,6 +6,7 @@ export const HeroSection = styled('section')`
 
   @media (min-width: ${screenLGmin}) {
     height: calc(100vh - var(--header-size) * 1.25);
+    min-height: 700px;
   }
 
   .bg-wrapper {
@@ -13,7 +14,6 @@ export const HeroSection = styled('section')`
 
     overflow: hidden;
     height: 100%;
-    max-height: 80vh;
 
     @media (min-width: ${screenLGmin}) {
       position: absolute;
@@ -21,6 +21,8 @@ export const HeroSection = styled('section')`
       left: 0;
       right: 0;
       z-index: 0;
+      height: calc(80vh - var(--header-size) * 1.25);
+      min-height: 600px;
     }
   }
 

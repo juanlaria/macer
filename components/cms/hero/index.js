@@ -17,7 +17,7 @@ const Hero = ({ primary, className }) => {
   if (primary) {
     return (
       <HeroSection id={id} className={`${className} ${grey ? '-grey' : ''}`}>
-        {hero_background_image && (
+        {Object.entries(hero_background_image).length !== 0 && (
           <div className="bg-wrapper">
             <motion.div
               className="bg-inner-wrapper"
@@ -38,7 +38,7 @@ const Hero = ({ primary, className }) => {
           </div>
         )}
         <Box>
-          {hero_logo && (
+          {Object.entries(hero_logo).length !== 0 && (
             <motion.div
               transition={{
                 damping: 20,
