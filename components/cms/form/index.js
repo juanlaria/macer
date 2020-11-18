@@ -98,7 +98,12 @@ const Form = ({
       },
       body: JSON.stringify(formValues),
     }).then(res => {
-      res.status === 200 ? setFormStatus('SUBMITTED') : setFormStatus('FAILED');
+      if (res.status === 200) {
+        setFormStatus('SUBMITTED');
+        gtag_report_conversion();
+      } else {
+        setFormStatus('FAILED');
+      }
     });
   };
 
@@ -142,7 +147,11 @@ const Form = ({
               return false;
             })}
           <CtaWrapper>
-            <Submit type="submit" className="button" disabled={formStatus === 'SUBMITTED'}>
+            <Submit
+              type="submit"
+              className="button"
+              disabled={formStatus === 'SUBMITTED'}
+            >
               {submitButtonText}
             </Submit>
             {formFields.map(field => {

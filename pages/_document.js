@@ -49,6 +49,57 @@ export default class MyDocument extends Document {
             crossOrigin="true"
           />
           <link rel="dns-prefetch" href="https://static.cdn.prismic.io" />
+
+          <link rel="preconnect" href="https://www.googletagmanager.com" />
+          <link rel="preconnect" href="https://www.google-analytics.com" />
+
+          {/* Google Analytics */}
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-79157140-1"
+          ></script>
+
+          <script
+            type="text/javascript"
+            dangerouslySetInnerHTML={{
+              __html: `window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+            
+              gtag('config', 'UA-79157140-1');`,
+            }}
+          />
+
+          {/* Google AdWords */}
+          <script
+            type="text/javascript"
+            dangerouslySetInnerHTML={{
+              __html: `window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+            
+              gtag('config', 'AW-985979755');`,
+            }}
+          />
+
+          {/* Google AdWords function */}
+          <script
+            type="text/javascript"
+            dangerouslySetInnerHTML={{
+              __html: `function gtag_report_conversion(url) {
+                var callback = function () {
+                  if (typeof(url) != 'undefined') {
+                    window.location = url;
+                  }
+                };
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-985979755/xSw2COaij-oBEOu2k9YD',
+                    'event_callback': callback
+                });
+                return false;
+              }`,
+            }}
+          />
         </Head>
         <body style={NODE_ENV === 'development' ? { display: 'block' } : {}}>
           <Main />
