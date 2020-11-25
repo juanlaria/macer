@@ -5,7 +5,7 @@ export default ({ doc, header, footer, preview }) => (
   <Page doc={doc} header={header} footer={footer} preview={preview} homepage />
 );
 
-export async function getStaticProps({ req, preview, previewData }) {
+export async function getServerSideProps({ req, preview, previewData }) {
   //Return page data
   const uid = 'home';
   const doc = await getPageData(req, uid, previewData);
